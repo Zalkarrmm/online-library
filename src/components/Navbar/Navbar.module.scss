@@ -1,0 +1,10 @@
+.root {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin-bottom: 20px;
+  select{
+    padding: 10px 15px;
+    border-radius: 8px;
+  }
+}
