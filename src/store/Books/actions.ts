@@ -21,7 +21,6 @@ export const setSortBooksActionByAplhabet = (order: string) => {
     payload: order,
   }
 }
-// books: books.sort((a:IBook, b:IBook)  )
 export const filterByAuthorAction = (payload: string): FilterAction => {
   return {
     type: booksTypes.FILTER_BY_AUTHOR,

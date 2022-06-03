@@ -21,12 +21,8 @@ const WishList = () => {
               key={item.id}
             />)
         } )}
-
-
-
       </div>
     </div>
   )
 }
-
 export default WishList

@@ -1,7 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Book from '../../components/Book'
-import ModalWindow from '../../components/AddWindow'
 import Navbar from '../../components/Navbar'
 import { RootState } from '../../store'
 import { setBooksAction } from '../../store/Books/actions'
@@ -15,15 +14,6 @@ const Main = () => {
   const { books } = useSelector((s: RootState) => s.Books)
   const [amount, setAmount] = React.useState<number>(0)
 
-  const modalState = useSelector((state: any) => state.App.modalState)
-
-  const templateModal = () => {
-    if (modalState) {
-      return <ModalWindow />
-    } else{
-      return <></>
-    }
-  }
   React.useEffect(() => {
     const booksData: IBook[] = JSON.parse(localStorage.getItem('books') || '{}')
     dispatch(setBooksAction(booksData))
@@ -41,7 +31,6 @@ const Main = () => {
   return (
     <div className={cls.root}>
       <Navbar amount={amount}  />
-      {templateModal()}
 
       {
         !books.length && <h1 className={cls.emptyText}>Library is empty</h1>

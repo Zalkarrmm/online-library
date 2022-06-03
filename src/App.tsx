@@ -10,12 +10,12 @@ if (!localStorage.getItem('books')) {
 }else if (!localStorage.getItem('wishlist')){
   localStorage.setItem('wishlist' , JSON.stringify([]))
 }
-
+const wishListItems = JSON.parse(localStorage.getItem('wishlist') || '{}')
 const App = () => {
   return (
     <div className={cls.root}>
       <header>
-        <Link to="/wishlist">Wish list</Link>
+        <Link to="/wishlist">Wish list({wishListItems.length}) </Link>
       </header>
       <Routes>
         <Route path="/" element={<Main />} />
