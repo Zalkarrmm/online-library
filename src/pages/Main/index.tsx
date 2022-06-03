@@ -36,10 +36,16 @@ const Main = () => {
   }, [books])
 
   if (!books) return <h1>Loading...</h1>
+
+
   return (
     <div className={cls.root}>
       <Navbar amount={amount}  />
       {templateModal()}
+
+      {
+        !books.length && <h1 className={cls.emptyText}>Library is empty</h1>
+      }
 
       <div className={cls.container}>
         {

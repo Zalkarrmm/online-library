@@ -27,6 +27,8 @@ export default function Book({ book }: Props) {
 
   }, [book.id])
 
+
+  //Adding to wishlist
   const onAddToWishList = (book: any)  => {
     const wishList: IBook[] = JSON.parse(localStorage.getItem('wishlist') as any)
     localStorage.setItem('wishlist' , JSON.stringify([
@@ -35,7 +37,14 @@ export default function Book({ book }: Props) {
     ]))
     setIsLiked(true)
   }
-
+  const onRemoveFromWishList = (book: any) => {
+    const wishList: IBook[] = JSON.parse(localStorage.getItem('wishlist') as any)
+    const filteredBooks = wishList.filter((item: any) => item.id !== book.id)
+    localStorage.setItem('wishlist' , JSON.stringify(
+      filteredBooks,
+    ))
+    setIsLiked(false)
+  }
   const {
     name,
     image,
@@ -45,7 +54,10 @@ export default function Book({ book }: Props) {
     author,
     category,
   } = book
-
+  //TODO fix the ANY
+  const onChangeStars = () => {
+    console.log(book)
+  }
   const starRating = {
     size: 25,
     count: 5,
@@ -53,6 +65,7 @@ export default function Book({ book }: Props) {
     value: stars,
     color: 'grey',
     activeColor: 'gold',
+    onChange: onChangeStars,
   }
 
   return (
@@ -85,11 +98,9 @@ export default function Book({ book }: Props) {
 
         {
           isLiked === true
-            ? <button className={cls.removeBtn}>Remove from wish list</button>
+            ? <button className={cls.removeBtn} onClick={() => onRemoveFromWishList(book)} >Remove from wish list</button>
             : <button className={cls.addBtn} onClick={() => onAddToWishList(book)}>Add to wish list</button>
         }
-
-
       </div>
     </div>
   )

@@ -4,13 +4,14 @@ import Main from './pages/Main'
 import cls from './App.module.scss'
 import WishList from './pages/WishList'
 import AddWindow from './components/AddWindow'
+
+if (!localStorage.getItem('books')) {
+  localStorage.setItem('books', JSON.stringify([]))
+}else if (!localStorage.getItem('wishlist')){
+  localStorage.setItem('wishlist' , JSON.stringify([]))
+}
+
 const App = () => {
-  React.useEffect(() => {
-    if(!localStorage.getItem('books')){
-      localStorage.setItem('books', JSON.stringify([]))
-      window.location.reload()
-    }
-  })
   return (
     <div className={cls.root}>
       <header>

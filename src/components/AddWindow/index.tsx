@@ -1,20 +1,15 @@
 import React, { useState } from 'react'
 import cls from './AddWindow.module.scss'
-// import { useDispatch } from 'react-redux'
-import { Link, Route } from 'react-router-dom'
-import App from '../../App'
+import { Link, useNavigate } from 'react-router-dom'
 import { IBook } from '../../types'
-// import { IBook } from '../../types'
 const AddWindow = () => {
-  // const dispatch = useDispatch()
-  // const [bookInputs, setBookInputs] = useState<IBook[]>([])
   const [nameValue, setNameValue] = useState<string>('')
   const [authorValue, setAuthorValue] = useState<string>('')
   const [imageValue, setImageValue] = useState<string>('')
   const [genreValue, setGenreValue] = useState<string>('')
   const [priceValue, setPriveValue] = useState<string>('')
   const [descriptionValue, setDecrioptionValue] = useState<string>('')
-
+  const navigate = useNavigate()
   const onChangeBooksNameInput = (e: any) => {
     setNameValue(e.target.value)
 
@@ -56,7 +51,7 @@ const AddWindow = () => {
           id:  new Date().getTime(),
         },
       ]))
-      window.open( '/', 'self')
+      navigate('/')
     }
   }
   //TODO create some normal way to redirect
