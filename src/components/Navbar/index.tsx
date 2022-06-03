@@ -1,8 +1,8 @@
 import React from 'react'
-// import AddBook from '../AddBook'
+import { Link } from 'react-router-dom'
 import cls from './Navbar.module.scss'
 import { NavbarTypes } from './types'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { IBook } from '../../types'
 import { filterByAuthorAction, filterByCategoryAction, setBooksAction, setSortBooksActionByAplhabet } from '../../store/Books/actions'
 
@@ -113,7 +113,7 @@ const Navbar = ({ amount }: any) => {
         <p>Books amount: {amount}</p>
       </div>
 
-      {/* <AddBook /> */}
+      <Link to="/addBook" className={cls.addBtn} > + ADD BOOK </Link>
     </nav>
   )
 }

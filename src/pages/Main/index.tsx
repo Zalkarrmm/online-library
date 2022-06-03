@@ -1,13 +1,12 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Book from '../../components/Book'
-import ModalWindow from '../../components/ModalWindow'
+import ModalWindow from '../../components/AddWindow'
 import Navbar from '../../components/Navbar'
 import { RootState } from '../../store'
 import { setBooksAction } from '../../store/Books/actions'
 import { IBook } from '../../types'
 import cls from './Main.module.scss'
-import data from '../../data/books.json'
 
 
 
@@ -28,7 +27,6 @@ const Main = () => {
   React.useEffect(() => {
     const booksData: IBook[] = JSON.parse(localStorage.getItem('books') || '{}')
     dispatch(setBooksAction(booksData))
-    localStorage.setItem('books', JSON.stringify(data))
   }, [dispatch])
 
   React.useEffect(() => {
@@ -38,7 +36,6 @@ const Main = () => {
   }, [books])
 
   if (!books) return <h1>Loading...</h1>
-
   return (
     <div className={cls.root}>
       <Navbar amount={amount}  />

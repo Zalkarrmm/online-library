@@ -8,27 +8,35 @@ interface Props {
 }
 
 export default function Book({ book }: Props) {
-  const [isLiked, setIsLiked] = React.useState<boolean | null>(null)
+
   React.useEffect(() => {
-    localStorage.setItem('wishlist', JSON.stringify([]))
-    const wishList = JSON.parse(localStorage.getItem('wishList') as any)
-    if (wishList) {
-      wishList.forEach((wishBook: IBook) => {
-        if (wishBook.id === book.id) {
-          setIsLiked(true)
-        } else {
-          setIsLiked(false)
-        }
-      })
+    if(!localStorage.getItem('wishlist')){
+      localStorage.setItem('wishlist', JSON.stringify([]))
     }
+  })
+
+  const [isLiked, setIsLiked] = React.useState<boolean>(false)
+
+  React.useEffect(() => {
+    const wishList: IBook[] = JSON.parse(localStorage.getItem('wishlist') as any)
+    wishList.map((item: IBook) => {
+      if (item.id === book.id) {
+        setIsLiked(true)
+      }
+    })
 
   }, [book.id])
-  const onAddToWishList = (book: IBook) => {
-    console.log(book)
+
+  const onAddToWishList = (book: any)  => {
+    const wishList: IBook[] = JSON.parse(localStorage.getItem('wishlist') as any)
+    localStorage.setItem('wishlist' , JSON.stringify([
+      ...wishList,
+      book,
+    ]))
+    setIsLiked(true)
   }
 
   const {
-    id,
     name,
     image,
     cost,
@@ -48,7 +56,7 @@ export default function Book({ book }: Props) {
   }
 
   return (
-    <div className={cls.card} key={id}>
+    <div className={cls.card}>
       <div className={cls.heartbox}></div>
 
       <div className={cls.cardBody}>
@@ -76,9 +84,9 @@ export default function Book({ book }: Props) {
         <p className={cls.description}>{description}</p>
 
         {
-          isLiked
-            ? <button>Remove from wish list</button>
-            : <button onClick={() => onAddToWishList(book)}>Add to wish list</button>
+          isLiked === true
+            ? <button className={cls.removeBtn}>Remove from wish list</button>
+            : <button className={cls.addBtn} onClick={() => onAddToWishList(book)}>Add to wish list</button>
         }
 
 
