@@ -52,6 +52,7 @@ const AddWindow = () => {
         },
       ]))
       navigate('/')
+      window.location.reload()
     }
   }
   //TODO create some normal way to redirect
